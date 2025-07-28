@@ -1,0 +1,60 @@
+<h2 mat-dialog-title>Nuevo Cliente</h2>
+
+<mat-dialog-content [formGroup]="clientForm">
+  <div class="form-row two-columns">
+    <mat-form-field appearance="fill">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="nombre" required>
+      <mat-error *ngIf="clientForm.get('nombre')?.hasError('required')">
+        El nombre es requerido
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Apellido</mat-label>
+      <input matInput formControlName="apellido" required>
+      <mat-error *ngIf="clientForm.get('apellido')?.hasError('required')">
+        El apellido es requerido
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>RUC o Cédula</mat-label>
+    <input matInput formControlName="rucCedula" required>
+    <mat-error *ngIf="clientForm.get('rucCedula')?.hasError('required')">
+      El RUC/Cédula es requerido
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email" type="email" required>
+    <mat-error *ngIf="clientForm.get('email')?.hasError('required')">
+      El email es requerido
+    </mat-error>
+    <mat-error *ngIf="clientForm.get('email')?.hasError('email')">
+      El formato del email no es válido
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Teléfono</mat-label>
+    <input matInput formControlName="telefono" required>
+    <mat-error *ngIf="clientForm.get('telefono')?.hasError('required')">
+      El teléfono es requerido
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Dirección</mat-label>
+    <textarea matInput formControlName="direccion"></textarea>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button mat-raised-button color="primary" (click)="onSave()" [disabled]="!clientForm.valid">
+    Guardar
+  </button>
+</mat-dialog-actions>

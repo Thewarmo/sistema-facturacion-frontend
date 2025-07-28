@@ -1,0 +1,134 @@
+<div *ngIf="cargando" class="loading-container">
+  <mat-spinner></mat-spinner>
+  <p>Cargando factura...</p>
+</div>
+
+<div *ngIf="!cargando && factura">
+  <mat-card class="factura-card">
+    <mat-card-header>
+      <mat-card-title>
+        <div class="header-content">
+          <span>Factura #{{ factura.numeroFactura }}</span>
+          <mat-chip [color]="getEstadoColor(factura.estado)" selected>
+            {{ factura.estado }}
+          </mat-chip>
+        </div>
+      </mat-card-title>
+      <mat-card-subtitle>
+        Fecha de emisión: {{ factura.fechaEmision | date:'dd/MM/yyyy HH:mm' }}
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <!-- Información del Cliente -->
+      <div class="cliente-section">
+        <h3><mat-icon>person</mat-icon> Información del Cliente</h3>
+        <div class="info-grid">
+          <div class="info-item">
+            <strong>Nombre:</strong> {{ factura.cliente.nombre }}
+          </div>
+          <div class="info-item" *ngIf="factura.cliente.email">
+            <strong>Email:</strong> {{ factura.cliente.email }}
+          </div>
+          <div class="info-item" *ngIf="factura.cliente.telefono">
+            <strong>Teléfono:</strong> {{ factura.cliente.telefono }}
+          </div>
+          <div class="info-item" *ngIf="factura.cliente.rucCedula">
+            <strong>RUC/Cédula:</strong> {{ factura.cliente.rucCedula }}
+          </div>
+        </div>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <!-- Detalles de Productos -->
+      <div class="productos-section">
+        <h3><mat-icon>shopping_cart</mat-icon> Productos</h3>
+        <mat-table [dataSource]="factura.detalles" class="mat-elevation-z2">
+          <ng-container matColumnDef="producto">
+            <mat-header-cell *matHeaderCellDef>Producto</mat-header-cell>
+            <mat-cell *matCellDef="let detalle">{{ detalle.producto.nombre }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="cantidad">
+            <mat-header-cell *matHeaderCellDef>Cantidad</mat-header-cell>
+            <mat-cell *matCellDef="let detalle">{{ detalle.cantidad }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="precioUnitario">
+            <mat-header-cell *matHeaderCellDef>Precio Unitario</mat-header-cell>
+            <mat-cell *matCellDef="let detalle">{{ detalle.producto.precioUnitario | currency:'COP' }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="subtotal">
+            <mat-header-cell *matHeaderCellDef>Subtotal</mat-header-cell>
+            <mat-cell *matCellDef="let detalle">{{ calcularSubtotal(detalle) | currency:'COP' }}</mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <!-- Totales -->
+      <div class="totales-section">
+        <div class="totales-grid">
+          <div class="total-item">
+            <span>Subtotal:</span>
+            <span>{{ factura.subtotal | currency:'COP' }}</span>
+          </div>
+          <div class="total-item">
+            <span>Impuestos:</span>
+            <span>{{ factura.totalImpuestos | currency:'COP' }}</span>
+          </div>
+          <div class="total-item total-final">
+            <span><strong>Total:</strong></span>
+            <span><strong>{{ factura.total | currency:'COP' }}</strong></span>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions class="actions-section">
+      <button mat-raised-button color="primary" (click)="generarPDF()">
+        <mat-icon>picture_as_pdf</mat-icon>
+        Generar PDF
+      </button>
+      
+      <button mat-raised-button color="accent" 
+              *ngIf="factura.estado === 'PENDIENTE'" 
+              (click)="pagarFactura()"
+              [disabled]="procesandoPago">
+        <mat-icon>payment</mat-icon>
+        <span *ngIf="!procesandoPago">Pagar Factura</span>
+        <span *ngIf="procesandoPago">Procesando...</span>
+      </button>
+
+      <button mat-raised-button color="warn" 
+              (click)="anularFactura()" 
+              *ngIf="factura?.estado !== 'ANULADA' && factura?.estado !== 'PAGADA'">
+        <mat-icon>cancel</mat-icon>
+        <span>Anular</span>
+      </button>
+      
+      <button mat-button routerLink="/dashboard/facturas">
+        <mat-icon>arrow_back</mat-icon>
+        Volver
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+<div *ngIf="!cargando && !factura" class="error-container">
+  <mat-card>
+    <mat-card-content>
+      <p>No se pudo cargar la factura.</p>
+      <button mat-raised-button routerLink="/dashboard/facturas">
+        Volver al listado
+      </button>
+    </mat-card-content>
+  </mat-card>
+</div>
+

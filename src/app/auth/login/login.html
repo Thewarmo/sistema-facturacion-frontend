@@ -1,0 +1,40 @@
+<div class="login-container">
+  <mat-card class="login-card">
+    <mat-card-header>
+      <mat-card-title>Sistema de Facturación</mat-card-title>
+      <mat-card-subtitle>Iniciar Sesión</mat-card-subtitle>
+    </mat-card-header>
+    
+    <mat-card-content>
+      <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Usuario o Email</mat-label>
+          <input matInput type="text" name="username" [(ngModel)]="username" required>
+          <mat-icon matSuffix>person</mat-icon>
+          <mat-error *ngIf="!username">Este campo es obligatorio</mat-error>
+        </mat-form-field>
+        
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Contraseña</mat-label>
+          <input matInput [type]="hidePassword ? 'password' : 'text'" name="password" [(ngModel)]="password" required>
+          <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
+            <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error *ngIf="!password">Este campo es obligatorio</mat-error>
+        </mat-form-field>
+        
+        <div *ngIf="errorMessage" class="error-message">
+          <mat-icon>error</mat-icon>
+          <span>{{ errorMessage }}</span>
+        </div>
+        
+        <div class="button-container">
+          <button mat-raised-button color="primary" type="submit" [disabled]="isLoading" class="login-button">
+            <span *ngIf="!isLoading">Iniciar Sesión</span>
+            <mat-spinner diameter="24" *ngIf="isLoading"></mat-spinner>
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

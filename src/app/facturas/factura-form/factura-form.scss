@@ -1,0 +1,92 @@
+mat-card {
+  margin: 16px;
+  max-width: 800px;
+}
+
+.form-row {
+  margin-bottom: 16px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.detalles-section {
+  margin: 24px 0;
+  
+  h3 {
+    margin-bottom: 16px;
+    color: #333;
+  }
+}
+
+.detalle-card {
+  margin-bottom: 16px;
+  background-color: #f8f9fa;
+}
+
+.detalle-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  
+  .producto-field {
+    flex: 2;
+  }
+  
+  .cantidad-field {
+    flex: 1;
+    min-width: 120px;
+  }
+  
+  .delete-button {
+    margin-top: 8px;
+  }
+}
+
+.add-product-section {
+  margin: 16px 0;
+  text-align: center;
+}
+
+.total-section {
+  margin: 24px 0;
+  text-align: right;
+  
+  h3 {
+    color: #2e7d32;
+    font-size: 1.5em;
+    margin: 0;
+  }
+}
+
+.form-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+  margin-top: 24px;
+}
+
+@media (max-width: 768px) {
+  .detalle-row {
+    flex-direction: column;
+    
+    .producto-field,
+    .cantidad-field {
+      width: 100%;
+    }
+    
+    .delete-button {
+      align-self: flex-end;
+      margin-top: 0;
+    }
+  }
+  
+  .form-actions {
+    flex-direction: column;
+    
+    button {
+      width: 100%;
+    }
+  }
+}

@@ -1,0 +1,148 @@
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  
+  mat-spinner {
+    margin-bottom: 16px;
+  }
+}
+
+.factura-card {
+  margin: 16px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.cliente-section,
+.pago-section,
+.productos-section {
+  margin: 24px 0;
+  
+  h3 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    color: #333;
+    
+    mat-icon {
+      color: #1976d2;
+    }
+  }
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.info-item {
+  padding: 12px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  border-left: 4px solid #1976d2;
+}
+
+mat-table {
+  width: 100%;
+  margin-top: 16px;
+}
+
+.totales-section {
+  margin: 24px 0;
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.totales-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 300px;
+  margin-left: auto;
+}
+
+.total-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  
+  &.total-final {
+    border-top: 2px solid #1976d2;
+    padding-top: 12px;
+    font-size: 1.2em;
+    color: #1976d2;
+  }
+}
+
+.actions-section {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+  padding: 16px 24px;
+  background-color: #fafafa;
+}
+
+.error-container {
+  margin: 16px;
+  text-align: center;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .factura-card {
+    margin: 8px;
+  }
+  
+  .header-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .totales-grid {
+    max-width: 100%;
+  }
+  
+  .actions-section {
+    flex-direction: column;
+    
+    button {
+      width: 100%;
+    }
+  }
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+
+  th, td {
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+    text-align: left;
+  }
+}
+
+.totales {
+  margin-top: 1rem;
+  font-weight: bold;
+}

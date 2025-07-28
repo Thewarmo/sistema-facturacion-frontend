@@ -1,0 +1,32 @@
+<form [formGroup]="form" (ngSubmit)="buscar()" class="formulario">
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Número de Factura</mat-label>
+    <input matInput formControlName="numeroFactura" type="number" placeholder="Ingrese ID de factura">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Buscar por Cliente</mat-label>
+    <mat-select formControlName="clienteId">
+      <mat-option [value]="null">Seleccione un cliente</mat-option>
+      <mat-option *ngFor="let cliente of clientes" [value]="cliente.id">
+        {{ cliente.nombre }} {{ cliente.apellido }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit">Buscar</button>
+</form>
+
+<mat-divider class="my-4"></mat-divider>
+
+<div *ngIf="buscando">Buscando...</div>
+
+<mat-card *ngFor="let factura of resultados" class="mb-3">
+  <mat-card-title>Factura: {{ factura.numeroFactura }}</mat-card-title>
+  <mat-card-content>
+    <p><strong>Cliente:</strong> {{ factura.cliente.nombre }} {{ factura.cliente.apellido }}</p>
+    <p><strong>Total:</strong> {{ factura.total | currency:'COP' }}</p>
+    <p><strong>Estado:</strong> {{ factura.estado }}</p>
+  </mat-card-content>
+</mat-card>
+

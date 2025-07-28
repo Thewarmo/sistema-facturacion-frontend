@@ -1,0 +1,69 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Gestión de Facturas</mat-card-title>
+  </mat-card-header>
+  
+  <mat-card-content>
+    <div class="header-actions">
+      <button mat-raised-button color="primary" (click)="irACrearFactura()">
+        <mat-icon>add</mat-icon>
+        Nueva Factura
+      </button>
+      <button mat-raised-button color="primary" (click)="irABuscarFactura()">
+        <mat-icon>search</mat-icon>
+        Buscar Facturas
+      </button>
+      <button mat-raised-button color="primary" (click)="irAReportes()">
+        <mat-icon>bar_chart</mat-icon>
+        Reportes
+      </button>
+    </div>
+
+    <mat-table [dataSource]="facturas" class="mat-elevation-z2" *ngIf="facturas.length > 0; else noFacturas">
+      <ng-container matColumnDef="numeroFactura">
+        <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
+        <mat-cell *matCellDef="let factura">{{ factura.numeroFactura }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="cliente">
+        <mat-header-cell *matHeaderCellDef>Cliente</mat-header-cell>
+        <mat-cell *matCellDef="let factura">{{ factura.cliente.nombre }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="fechaEmision">
+        <mat-header-cell *matHeaderCellDef>Fecha</mat-header-cell>
+        <mat-cell *matCellDef="let factura">{{ factura.fechaEmision | date:'short' }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="total">
+        <mat-header-cell *matHeaderCellDef>Total</mat-header-cell>
+        <mat-cell *matCellDef="let factura">{{ factura.total | currency:'COP' }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="estado">
+        <mat-header-cell *matHeaderCellDef>Estado</mat-header-cell>
+        <mat-cell *matCellDef="let factura">{{ factura.estado }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="acciones">
+        <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
+        <mat-cell *matCellDef="let factura">
+          <button mat-icon-button color="primary" [routerLink]="['/dashboard/facturas', factura.id]">
+            <mat-icon>visibility</mat-icon>
+          </button>
+          <button mat-icon-button color="accent" [routerLink]="['/dashboard/facturas/editar', factura.id]">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <ng-template #noFacturas>
+      <p>No hay facturas registradas.</p>
+    </ng-template>
+  </mat-card-content>
+</mat-card>
+

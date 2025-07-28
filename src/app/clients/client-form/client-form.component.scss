@@ -1,0 +1,23 @@
+.full-width {
+  width: 100%;
+}
+
+.form-row.two-columns {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.form-row.two-columns mat-form-field {
+  flex: 1;
+  min-width: 0;
+}
+
+
+.snackbar-error {
+  background-color: #d32f2f !important; /* rojo intenso */
+  color: white !important;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+}
