@@ -17,7 +17,7 @@ export class AuthService {
         if (response && response.accessToken && response.refreshToken) {
           localStorage.setItem('access_token', response.accessToken);
           localStorage.setItem('refresh_token', response.refreshToken);
-          console.log('Tokens almacenados:', response);
+          
         }
       })
     );
@@ -26,7 +26,7 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
-    console.log('Sesión cerrada. Tokens eliminados.');
+    
   }
 
   getToken(): string | null {
@@ -47,7 +47,7 @@ export class AuthService {
       tap(response => {
         if (response && response.accessToken) {
           localStorage.setItem('access_token', response.accessToken);
-          console.log('Access token actualizado');
+          
         }
       })
     );

@@ -4,11 +4,11 @@
   <div class="dashboard-cards">
     <mat-card class="dashboard-card">
         <mat-card-header>
-            <mat-card-title><a routerLink="/dashboard/invoices" class="card-link">Facturas</a></mat-card-title>
+            <mat-card-title><a routerLink="/dashboard/facturas" class="card-link">Facturas</a></mat-card-title>
             <mat-icon>receipt</mat-icon>
         </mat-card-header>
         <mat-card-content>
-            <h2>0</h2>
+            <h2>{{ totalFacturas }}</h2>
             <p>Total de facturas</p>
         </mat-card-content>
     </mat-card>
@@ -18,17 +18,17 @@
         <mat-icon>people</mat-icon>
         </mat-card-header>
         <mat-card-content>
-            <h2>0</h2>
+            <h2>{{totalClientes}}</h2>
             <p>Total de clientes</p>
         </mat-card-content>
     </mat-card>
     <mat-card class="dashboard-card">
         <mat-card-header>
-            <mat-card-title><a routerLink="/dashboard/invoices" class="card-link">Productos</a></mat-card-title>
+            <mat-card-title><a routerLink="/dashboard/productos" class="card-link">Productos</a></mat-card-title>
             <mat-icon>inventory</mat-icon>
         </mat-card-header>
         <mat-card-content>
-            <h2>0</h2>
+            <h2>{{totalProductos}}</h2>
             <p>Total de productos</p>
         </mat-card-content>
     </mat-card>
@@ -38,8 +38,9 @@
       <mat-card-title>Información del Sistema</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <p>Aquí construiremos la lógica para gestionar las facturas.</p>
-      <p>Utiliza el menú lateral para navegar entre las diferentes secciones del sistema.</p>
+      <p>Version 1.0.0</p>
+      <p>Desarrollado por Andres</p>
+      <p>Email: {{email}}</p>
     </mat-card-content>
   </mat-card>
 </div>

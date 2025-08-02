@@ -33,3 +33,106 @@ th {
 tr.cursor-pointer {
   cursor: pointer;
 }
+
+// Estilos comunes para todas las tablas
+.header-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  gap: 16px;
+  
+  .search-field {
+    flex: 1;
+    max-width: 400px;
+  }
+  
+  .action-buttons {
+    display: flex;
+    gap: 8px;
+  }
+}
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.mat-mdc-table {
+  width: 100%;
+}
+
+.mat-mdc-row .mat-mdc-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
+.mat-mdc-row .mat-mdc-cell:first-of-type,
+.mat-mdc-header-row .mat-mdc-header-cell:first-of-type {
+  padding-left: 24px;
+}
+
+.mat-mdc-row .mat-mdc-cell:last-of-type,
+.mat-mdc-header-row .mat-mdc-header-cell:last-of-type {
+  padding-right: 24px;
+}
+
+// Chips para estados y tipos
+.chip-servicio {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+
+.chip-producto {
+  background-color: #f3e5f5;
+  color: #7b1fa2;
+}
+
+.chip-pagada {
+  background-color: #e8f5e8;
+  color: #2e7d32;
+}
+
+.chip-pendiente {
+  background-color: #fff3e0;
+  color: #f57c00;
+}
+
+.chip-anulada {
+  background-color: #ffebee;
+  color: #d32f2f;
+}
+
+.chip-default {
+  background-color: #f5f5f5;
+  color: #616161;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  
+  mat-spinner {
+    margin-bottom: 16px;
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .header-actions {
+    flex-direction: column;
+    align-items: stretch;
+    
+    .search-field {
+      max-width: none;
+    }
+  }
+}

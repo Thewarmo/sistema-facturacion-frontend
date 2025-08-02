@@ -45,21 +45,21 @@ export class Login {
     this.errorMessage = null;
     this.isLoading = true;
     
-    console.log('Intentando iniciar sesión con:', this.username, this.password);
+    
     this.authService.login({ username: this.username, password: this.password }).subscribe({
       next: response => {
-        console.log('Inicio de sesión exitoso:', response);
-        console.log('Token guardado:', localStorage.getItem('jwt_token'));
-        console.log('¿Está autenticado?', this.authService.isAuthenticated());
+        
+        
+        
         this.isLoading = false;
         // Redirigir al usuario a una página principal o dashboard
         setTimeout(() => {
-          console.log('Intentando navegar a dashboard...');
+          
           this.router.navigate(['/dashboard']);
         }, 100);
       },
       error: err => {
-        console.error('Error en el inicio de sesión:', err);
+        
         this.isLoading = false;
         // Mostrar un mensaje de error al usuario
         if (err.status === 401) {
