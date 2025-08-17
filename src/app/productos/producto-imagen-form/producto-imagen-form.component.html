@@ -1,0 +1,104 @@
+<div class="upload-modal">
+  <!-- Header del modal -->
+  <div class="modal-header">
+    <h2>📸 Subir Imagen de Producto</h2>
+  </div>
+
+  <form (ngSubmit)="onSubmit()" class="upload-form">
+    <!-- Select de producto -->
+    <div class="product-select-container">
+      <mat-form-field appearance="fill">
+        <mat-label>Selecciona un Producto</mat-label>
+        <mat-select [(ngModel)]="productoSeleccionadoId" name="productoId" required>
+          <mat-option *ngFor="let producto of productos" [value]="producto.id">
+            {{ producto.nombre }}
+          </mat-option>
+        </mat-select>
+        <mat-icon matSuffix>inventory_2</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <!-- Zona de subida de archivo mejorada -->
+    <div 
+      class="file-upload-zone" 
+      [class.has-file]="archivoSeleccionado"
+      (click)="fileInput.click()"
+      (dragover)="onDragOver($event)"
+      (dragleave)="onDragLeave($event)"
+      (drop)="onDrop($event)">
+      
+      <mat-icon class="upload-icon">
+        {{ archivoSeleccionado ? 'check_circle' : 'cloud_upload' }}
+      </mat-icon>
+      
+      <div class="upload-text">
+        <span class="primary-text">
+          {{ archivoSeleccionado ? 'Imagen seleccionada' : 'Arrastra una imagen aquí' }}
+        </span>
+        <span class="secondary-text">
+          {{ archivoSeleccionado ? '' : 'o haz clic para seleccionar' }}
+        </span>
+      </div>
+      
+      <button 
+        type="button" 
+        class="select-file-btn"
+        *ngIf="!archivoSeleccionado">
+        Seleccionar Imagen
+      </button>
+      
+      <div class="file-name" [class.no-file]="!archivoSeleccionado">
+        {{ archivoSeleccionado?.name || 'Formatos permitidos: JPG, PNG, GIF' }}
+      </div>
+      
+      <input 
+        hidden 
+        (change)="onFileSelected($event)" 
+        #fileInput 
+        type="file" 
+        accept="image/*">
+    </div>
+
+    <!-- Vista previa de imagen -->
+    <div *ngIf="imagenPreview" class="image-preview-container">
+      <div class="preview-label">Vista Previa</div>
+      <img [src]="imagenPreview" class="image-preview" alt="Vista previa">
+    </div>
+
+    <!-- Barra de progreso -->
+    <div *ngIf="subiendo" class="progress-container">
+      <mat-progress-bar mode="indeterminate" color="primary"></mat-progress-bar>
+      <p style="text-align: center; margin-top: 8px; color: #666; font-size: 0.875rem;">
+        Subiendo imagen...
+      </p>
+    </div>
+
+    <!-- Botones de acción -->
+    <div class="actions">
+      <button 
+        type="button" 
+        class="cancel-btn" 
+        mat-dialog-close
+        [disabled]="subiendo">
+        Cancelar
+      </button>
+      
+      <button 
+        type="submit" 
+        class="submit-btn"
+        [disabled]="!productoSeleccionadoId || !archivoSeleccionado || subiendo">
+        <mat-icon *ngIf="subiendo" style="margin-right: 8px; animation: spin 1s linear infinite;">
+          refresh
+        </mat-icon>
+        {{ subiendo ? 'Subiendo...' : 'Subir Imagen' }}
+      </button>
+    </div>
+  </form>
+</div>
+
+<style>
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>

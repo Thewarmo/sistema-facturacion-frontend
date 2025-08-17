@@ -10,6 +10,7 @@ import { FacturaListComponent } from './facturas/factura-list/factura-list';
 import { FacturaDetalleComponent } from './facturas/factura-detalle/factura-detalle';
 import { FacturaBuscarComponent } from './facturas/factura-buscar/factura-buscar';
 import { FacturaReporteComponent } from './facturas/factura-reporte/factura-reporte.component';
+import { ProductoImagenFormComponent } from './productos/producto-imagen-form/producto-imagen-form.component';
 
 export const routes: Routes = [
     { path: 'login', component: Login },
@@ -21,6 +22,7 @@ export const routes: Routes = [
                 { path: '', component: DashboardHomeComponent },
                 { path: 'clients', component: ClientsComponent }, 
                 { path: 'productos', component: ProductosComponent },
+                { path: 'productos/imagen', component: ProductoImagenFormComponent },
                 { path: 'facturas', component: FacturaListComponent },
                 { path: 'facturas/nueva', component: FacturaFormComponent },
                 { path: 'facturas/buscar', component: FacturaBuscarComponent },

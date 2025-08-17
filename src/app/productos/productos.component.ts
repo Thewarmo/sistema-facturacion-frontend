@@ -16,6 +16,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import Swal from 'sweetalert2';
+import { ProductoImagenFormComponent } from './producto-imagen-form/producto-imagen-form.component';
 
 @Component({
   selector: 'app-productos',
@@ -107,5 +108,25 @@ export class ProductosComponent implements OnInit {
         }
       });
   }
+  
+  abrirDialogImagen(producto?: Producto): void {
+    const dialogRef = this.dialog.open(ProductoImagenFormComponent, {
+    width: '500px',
+    maxWidth: '90vw',
+    minHeight: '400px',
+    maxHeight: '90vh',
+    autoFocus: false,
+    disableClose: false,
+    hasBackdrop: true,
+    panelClass: ['custom-modal-panel', 'modal-no-padding'],
+    data: {
+      productos: this.productos
+    }
+  });
+  dialogRef.afterClosed().subscribe(res => {
+    if (res) this.loadProductos();
+  });
+  }
+
 }
 
